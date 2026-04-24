@@ -16,23 +16,37 @@ int main() {
     cout << "Initial queue:" << endl;
     printQueue(carQueue);
 
-    int random = rand() % 100;
+    int random;
+
     int count = 1;
     while(!carQueue.empty()) {
+        random = rand() % 100;
         cout << "Time: " << count << " Operation: ";
         if (random <= 45) {
+            cout << " Joined lane: ";
             carQueue.push_back(Car());
             carQueue.back().print();
-            cout << endl;
         }
+        else {
+            cout << " Car paid: ";
+            carQueue.front().print();
+            carQueue.pop_front();
+        }
+        printQueue(carQueue);
+        ++count;
     }
 
     return 0;
 }
 
 void printQueue(deque<Car> carQ) {
-    for (int i = 0; i < carQ.size(); ++i) {
-        cout << "\t";
-        carQ[i].print();
+    if (!carQ.empty()) {
+        for (int i = 0; i < carQ.size(); ++i) {
+            cout << "\t";
+            carQ[i].print();
+        }
+    }
+    else {
+        cout << "\tEmpty" << endl;
     }
 }
